@@ -19,7 +19,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     setLoading(true); setError("");
     fetch("/api/catalog", { signal: controller.signal }).then(async response => {
       if (!response.ok) throw new Error("পণ্যের তথ্য আনা সম্ভব হয়নি। আবার চেষ্টা করুন।");
-      const data = await response.json();
+      const data = await response.json() as { products: Product[]; categories: Category[]; snapshot: boolean };
       setProducts(data.products); setCategories(data.categories); setSnapshot(data.snapshot);
     }).catch(error => {
       if (!controller.signal.aborted) setError(error.message || "সংযোগে সমস্যা হয়েছে।");

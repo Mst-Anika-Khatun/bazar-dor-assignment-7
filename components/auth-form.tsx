@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Eye, EyeOff, Github, LoaderCircle } from "lucide-react";
+import { Eye, EyeOff, GitBranch, LoaderCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
 
@@ -47,7 +47,7 @@ export function AuthForm({ mode }: { mode: "signin" | "signup" }) {
     try {
       const response = await fetch("/api/auth-providers");
       if (!response.ok) throw new Error("Provider check failed");
-      const providers = await response.json();
+      const providers = await response.json() as Record<string, boolean>;
       if (!providers[provider]) { fail(`${provider === "google" ? "Google" : "GitHub"} সাইন ইন এখনো চালু হয়নি। আপাতত ইমেইল দিয়ে সাইন ইন করুন।`); return; }
       const result = await authClient.signIn.social({ provider, callbackURL: "/?auth=success", errorCallbackURL: "/signin?error=social" });
       if (result.error) fail("সোশ্যাল সাইন ইন হয়নি। আবার চেষ্টা করুন।");
@@ -66,7 +66,7 @@ export function AuthForm({ mode }: { mode: "signin" | "signup" }) {
     </form>
     <div className="auth-divider"><span>অথবা</span></div>
     <div className="social-buttons"><button className="button button-outline" disabled={busy || !!socialBusy} onClick={() => socialLogin("google")}>{socialBusy === "google" ? <LoaderCircle size={16} className="spin" /> : <span className="google-g" aria-hidden="true">G</span>}Google</button>
-      <button className="button button-outline" disabled={busy || !!socialBusy} onClick={() => socialLogin("github")}>{socialBusy === "github" ? <LoaderCircle size={16} className="spin" /> : <Github size={17} />}GitHub</button></div>
+      <button className="button button-outline" disabled={busy || !!socialBusy} onClick={() => socialLogin("github")}>{socialBusy === "github" ? <LoaderCircle size={16} className="spin" /> : <GitBranch size={17} />}GitHub</button></div>
     <p className="auth-switch">{signup ? "অ্যাকাউন্ট আছে?" : "অ্যাকাউন্ট নেই?"} <Link href={signup ? "/signin" : "/signup"}>{signup ? "সাইন ইন করুন" : "সাইন আপ করুন"}</Link></p>
   </section></div>;
 }
