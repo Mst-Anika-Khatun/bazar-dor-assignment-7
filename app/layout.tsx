@@ -3,6 +3,8 @@ import "./globals.css";
 import { Providers } from "@/components/providers";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { Suspense } from "react";
+import { AuthFeedback } from "@/components/auth-feedback";
 
 export const metadata: Metadata = {
   title: { default: "বাজার দর | BazarDor", template: "%s | বাজার দর" },
@@ -20,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="bn">
-      <body className="antialiased"><Providers><a className="skip-link" href="#main-content">মূল অংশে যান</a><Navbar /><main id="main-content">{children}</main><Footer /></Providers></body>
+      <body className="antialiased"><Providers><Suspense fallback={null}><AuthFeedback /></Suspense><a className="skip-link" href="#main-content">মূল অংশে যান</a><Navbar /><main id="main-content">{children}</main><Footer /></Providers></body>
     </html>
   );
 }
