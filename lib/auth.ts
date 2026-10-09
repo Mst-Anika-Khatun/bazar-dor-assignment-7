@@ -11,6 +11,9 @@ function createAuth() {
   return betterAuth({
     appName: "BazarDor", secret,
     baseURL: getEnvironment("BETTER_AUTH_URL") || "http://localhost:3000",
+    trustedOrigins: process.env.NODE_ENV === "development"
+  ? ["http://localhost:3000", "http://192.168.0.102:3000"]
+  : [],
     database: drizzleAdapter(getDatabase(), { provider: "sqlite", schema }),
     emailAndPassword: { enabled: true, autoSignIn: false, requireEmailVerification: false, minPasswordLength: 8 },
     socialProviders: {
