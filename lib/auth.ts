@@ -14,7 +14,7 @@ export function getAuth() {
     appName: "BazarDor", secret,
     baseURL: getEnvironment("BETTER_AUTH_URL") || "http://localhost:3000",
     database: drizzleAdapter(getDatabase(), { provider: "sqlite", schema }),
-    emailAndPassword: { enabled: true, requireEmailVerification: false, minPasswordLength: 8 },
+    emailAndPassword: { enabled: true, autoSignIn: false, requireEmailVerification: false, minPasswordLength: 8 },
     socialProviders: {
       ...(googleId && googleSecret ? { google: { clientId: googleId, clientSecret: googleSecret } } : {}),
       ...(githubId && githubSecret ? { github: { clientId: githubId, clientSecret: githubSecret } } : {}),
