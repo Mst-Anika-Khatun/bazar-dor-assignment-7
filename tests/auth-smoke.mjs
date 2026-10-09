@@ -16,7 +16,8 @@ let checks = 0;
 function check(condition, message) { assert.ok(condition, message); checks++; console.log(`PASS ${message}`); }
 
 check((await request("/missing-page")).status === 404, "unknown route returns 404");
-check((await request("/category/invalid")).status === 404, "invalid category returns 404");
+const invalidCategory = await request("/category/invalid");
+check((await invalidCategory.text()).includes("পেজটি পাওয়া যায়নি"), "invalid category renders friendly 404");
 check((await request("/product/unknown")).status === 404, "unknown product returns 404 before login");
 const protectedResponse = await request("/product/miniket-chal");
 check([307, 308].includes(protectedResponse.status) && protectedResponse.headers.get("location")?.includes("/signin"), "anonymous details redirects to signin");
