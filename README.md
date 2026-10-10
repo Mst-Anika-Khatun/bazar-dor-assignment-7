@@ -106,8 +106,10 @@ The hosted preview uses the same App Router source with a Workers-compatible bui
 
 ## Submission
 
-- Live Link: add your final examiner-accessible deployment URL.
-- GitHub Repository Link: add your own repository URL.
+## Submission
+
+- Live Link: https://bazar-dor-assignment-7.vercel.app
+- GitHub Repository Link: https://github.com/Mst-Anika-Khatun/bazar-dor-assignment-7
 
 ## Assets
 
