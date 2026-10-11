@@ -2,7 +2,7 @@ import productSnapshot from "@/data/products.json";
 import categorySnapshot from "@/data/categories.json";
 import type { Product, Category } from "@/lib/types";
 
-const bases = ["https://api.api-store.workers.dev/api/bazardor", "https://api.abcz.workers.dev/api/bazardor"];
+const bases = ["https://openapi.programming-hero.com/api/bazardor"];
 type Catalog = { products: Product[]; categories: Category[]; snapshot: boolean };
 let cached: { data: Catalog; expires: number } | undefined;
 let pending: Promise<Catalog> | undefined;
